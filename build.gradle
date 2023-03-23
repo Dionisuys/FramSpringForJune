@@ -1,0 +1,36 @@
+plugins {
+	id 'java'
+	id 'org.springframework.boot' version '3.0.5'
+	id 'io.spring.dependency-management' version '1.1.0'
+}
+
+group = 'com.example'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = '17'
+
+repositories {
+	mavenCentral()
+}
+
+dependencies {
+	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+	implementation 'org.springframework.boot:spring-boot-starter-web'
+	runtimeOnly 'com.mysql:mysql-connector-j'
+	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+}
+
+tasks.named('test') {
+	useJUnitPlatform()
+}
+
+tasks.register('buildSize') {
+	dependsOn 'build'
+	doLast {
+		def projectDir = project.projectDir
+		def buildDir = projectDir.getAbsolutePath() + "/build"
+		def size = new File(buildDir).size()
+		def kb = size / 1024
+		def mb = kb / 1024
+		println "Build size: ${mb} MB (${kb} KB)"
+	}
+}
