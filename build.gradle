@@ -1,18 +1,19 @@
 plugins {
-	id 'java'
-	id 'org.springframework.boot' version '3.0.5'
-	id 'io.spring.dependency-management' version '1.1.0'
+	id 'java' // Плагин для работы с Java
+	id 'org.springframework.boot' version '3.0.5' // Плагин для работы с Spring Boot
+	id 'io.spring.dependency-management' version '1.1.0' // Плагин для управления зависимостями Spring
 }
 
-group = 'com.example'
-version = '0.0.1-SNAPSHOT'
-sourceCompatibility = '17'
+group = 'com.example' // Идентификатор проекта
+version = '0.0.1-SNAPSHOT' // Версия проекта
+sourceCompatibility = '17' // Версия языка Java
 
 repositories {
-	mavenCentral()
+	mavenCentral() // Репозиторий для загрузки зависимостей
 }
 
 dependencies {
+	/*Зависимости для Spring Boot*/
 	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
 	implementation 'org.springframework.boot:spring-boot-starter-web'
 	runtimeOnly 'com.mysql:mysql-connector-j'
@@ -20,7 +21,7 @@ dependencies {
 }
 
 tasks.named('test') {
-	useJUnitPlatform()
+	useJUnitPlatform() // Использовать JUnit Platform для запуска тестов
 }
 
 tasks.register('buildSize') {
@@ -31,6 +32,6 @@ tasks.register('buildSize') {
 		def size = new File(buildDir).size()
 		def kb = size / 1024
 		def mb = kb / 1024
-		println "Build size: ${mb} MB (${kb} KB)"
+		println "Размер сборки: ${mb} МБ (${kb} КБ)"
 	}
 }
