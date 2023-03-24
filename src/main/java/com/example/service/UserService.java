@@ -8,12 +8,18 @@ import org.springframework.stereotype.Service;
 /*Сервис для пользователей, который обрабатывает CRUD операции.*/
 @Service
 public class UserService {
+
+    private final UserRepository userRepository;
+
     @Autowired
-    private UserRepository userRepository;
+    public UserService(UserRepository userRepository) {
+        this.userRepository = userRepository;
+    }
 
     /*Получение пользователя по id*/
     public User getUser(Long id) {
-        return userRepository.findById(id).orElse(null);
+        return userRepository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("User not found"));
     }
 
     /*Создание пользователя*/
@@ -23,12 +29,20 @@ public class UserService {
 
     /*Обновление пользователя по id*/
     public User updateUser(Long id, User user) {
-        user.setId(id);
-        return userRepository.save(user);
+        User existingUser = userRepository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("User not found"));
+
+        existingUser.setName(user.getName());
+        existingUser.setEmail(user.getEmail());
+
+        return userRepository.save(existingUser);
     }
 
     /*Удаление пользователя по id*/
     public void deleteUser(Long id) {
-        userRepository.deleteById(id);
+        User existingUser = userRepository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("User not found"));
+
+        userRepository.delete(existingUser);
     }
 }

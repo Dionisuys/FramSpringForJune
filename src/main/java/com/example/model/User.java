@@ -3,8 +3,8 @@ package com.example.model;
 import jakarta.persistence.*;
 
 /*Класс-сущность для пользователя, который имеет поля id, имя и
-* адресэлектронной почты.
-*/
+* адрес электронной почты.
+* */
 @Entity
 @Table(name = "users")
 public class User {
