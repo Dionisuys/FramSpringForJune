@@ -8,6 +8,7 @@
 	<li>Gradle-7.6.1</li>
 	<li>openGDK-17.0.6</li>
 	<li>MySQL</li>
+        <li>Apache</li>
 </ul>
 
 <h2>Функционал</h2>
